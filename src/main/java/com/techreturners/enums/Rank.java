@@ -1,82 +1,29 @@
 package com.techreturners.enums;
 
 public enum Rank {
-    TWO {
-        @Override
-        public char toChar() {
-            return '2';
-        }
-    },
-    THREE{
-        @Override
-        public char toChar() {
-            return '3';
-        }
-    },
-    FOUR {
-        @Override
-        public char toChar() {
-            return '4';
-        }
-    },
-    FIVE {
-        @Override
-        public char toChar() {
-            return '5';
-        }
-    },
-    SIX {
-        @Override
-        public char toChar() {
-            return '6';
-        }
-    },
-    SEVEN {
-        @Override
-        public char toChar() {
-            return '7';
-        }
-    },
-    EIGHT {
-        @Override
-        public char toChar() {
-            return '8';
-        }
-    },NINE {
-        @Override
-        public char toChar() {
-            return '9';
-        }
-    },TEN {
-        @Override
-        public char toChar() {
-            return 'T';
-        }
-    },JACK {
-        @Override
-        public char toChar() {
-            return 'J';
-        }
-    },QUEEN {
-        @Override
-        public char toChar() {
-            return 'Q';
-        }
-    },KING {
-        @Override
-        public char toChar() {
-            return 'K';
-        }
-    },ACE {
-        @Override
-        public char toChar() {
-            return 'A';
-        }
-    };
+    TWO("2"),
+    THREE("3"),
+    FOUR("4"),
+    FIVE("5"),
+    SIX("6"),
+    SEVEN("7"),
+    EIGHT("8"),
+    NINE("9"),
+    TEN("10"),
+    JACK("J"),
+    QUEEN("Q"),
+    KING("K"),
+    ACE("A");
 
+    private String rank;
 
-    public char toChar() {
-        return 'X';
+    // Constructor
+    Rank (String r) {
+        rank = r;
+    }
+
+    public String toString() {
+        return rank;
     }
 }
 
