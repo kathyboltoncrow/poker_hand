@@ -1,11 +1,10 @@
 package com.techreturners;
 
-import com.techreturners.enums.Suit;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameTest {
     @Test
@@ -21,4 +20,15 @@ public class GameTest {
         List<Card> hand = game.deal();
         assertEquals(5,hand.size());
     }
+
+    @Test
+    public void dealHand(){
+        Game game = new Game();
+        List<Card> deck = game.initialiseDeck();
+        List<Card> hand = game.deal();
+        assertEquals(47,deck.size());
+        assertEquals(5,hand.size());
+    }
+
+
 }

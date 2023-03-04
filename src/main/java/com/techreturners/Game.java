@@ -9,7 +9,6 @@ public class Game {
 
     private static final int DECK_CARDS = 52;
     private static final int NUMBER_CARDS_PER_HAND = 5;
-
     private List<Card> deck;
 
 
@@ -23,18 +22,16 @@ public class Game {
                 deck.add(card);
             }
         }
+        Collections.shuffle(deck);
         return deck;
     }
 
         public List<Card> deal() {
             ArrayList<Card> hand = new ArrayList<Card>();
-            ArrayList<Card> shuffledDeck = new ArrayList<Card>(deck);
-            Collections.shuffle(shuffledDeck);
-
             for(int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
-               hand.add(shuffledDeck.get(i));
+               hand.add(deck.get(i));
+               deck.remove(i);
             }
-
             return hand;
 
          }
