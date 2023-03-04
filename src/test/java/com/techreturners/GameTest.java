@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class GameTest {
@@ -30,5 +31,13 @@ public class GameTest {
         assertEquals(5,hand.size());
     }
 
+    @Test
+    public void getPlayers(){
+        Game game = new Game();
+        game.addPlayer("White");
+        game.addPlayer("Black");
+        Set<Player> players = game.getPlayers();
+        assertEquals(2, players.size());
+    }
 
 }

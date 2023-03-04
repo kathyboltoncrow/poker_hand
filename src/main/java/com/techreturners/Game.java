@@ -10,7 +10,20 @@ public class Game {
     private static final int DECK_CARDS = 52;
     private static final int NUMBER_CARDS_PER_HAND = 5;
     private List<Card> deck;
+    private Set<Player> players;
 
+    public Game() {
+        players = new HashSet<Player>();
+    }
+
+    public Player addPlayer(String name){
+        Player player = new Player(name);
+        players.add(player);
+        return player;
+    }
+    public Set<Player> getPlayers(){
+        return players;
+    }
 
     public List<Card> initialiseDeck() {
         deck = new ArrayList<>(DECK_CARDS);
@@ -26,15 +39,26 @@ public class Game {
         return deck;
     }
 
-        public List<Card> deal() {
-            ArrayList<Card> hand = new ArrayList<Card>();
-            for(int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
-               hand.add(deck.get(i));
-               deck.remove(i);
-            }
-            return hand;
+    public List<Card> deal() {
+        ArrayList<Card> hand = new ArrayList<Card>();
+        for (int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
+            hand.add(deck.get(i));
+            deck.remove(i);
+        }
+        return hand;
+    }
 
-         }
+    public void casinoDeal(){
+        initialiseDeck();
+        ArrayList<Card> hand = new ArrayList<Card>();
+        for (int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
+
+            hand.add(deck.get(i));
+            deck.remove(i);
+        }
+
+
+    }
 
 }
 
