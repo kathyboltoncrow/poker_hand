@@ -129,5 +129,31 @@ public class PlayerTest {
         assertFalse(player.isPair());
     }
 
+    @Test
+    public void isThreeOfaKind(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertTrue(player.isThreeOfaKind());
+    }
+
+    @Test
+    public void isNotThreeOfaKind(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("QD"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertFalse(player.isThreeOfaKind());
+    }
+
 
 }

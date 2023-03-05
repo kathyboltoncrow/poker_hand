@@ -96,6 +96,16 @@ public class Player {
         return false;
     }
 
+    public boolean isThreeOfaKind(){
+        for (Card card: hand) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isStraightFlush(){
         boolean isStraightFlush = false;
         return isStraightFlush;
