@@ -190,5 +190,31 @@ public class PlayerTest {
         assertFalse(player.isFullHouse());
     }
 
+    @Test
+    public void isFourOfaKind(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("6C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertTrue(player.isFourOfaKind());
+    }
+
+    @Test
+    public void isNotFourOfaKind(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("QD"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertFalse(player.isFourOfaKind());
+    }
+
 
 }

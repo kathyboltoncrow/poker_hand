@@ -90,6 +90,16 @@ public class Player {
         return false;
     }
 
+    public boolean isFourOfaKind(){
+        for (Card card: hand) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isStraightFlush(){
         boolean isStraightFlush = false;
         return isStraightFlush;
