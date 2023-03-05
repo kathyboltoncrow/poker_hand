@@ -1,5 +1,7 @@
 package com.techreturners.enums;
 
+import java.util.Arrays;
+
 public enum Rank {
     TWO("2"),
     THREE("3"),
@@ -42,6 +44,16 @@ public enum Rank {
     }
     public int getValue() {
         return value;
+    }
+
+    public Rank getPrior() {
+        Rank prior = null;
+        Rank[] ranks = Rank.values();
+        int i = Arrays.binarySearch(ranks, this);
+        if (i > 0) {
+            prior = ranks[i-1];
+        }
+        return prior;
     }
 }
 

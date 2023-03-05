@@ -80,6 +80,23 @@ public class Player {
         return false;
     }
 
+    public boolean isTwoPairs(){
+        Set<Rank> twoPairs = new HashSet<Rank>();
+
+        for (Card card: hand) {
+            Rank rank = card.getRank();
+            if(! twoPairs.contains(rank)) {
+                if (countRank(rank) == 2) {
+                    twoPairs.add(rank);
+                }
+            }
+        }
+        if(twoPairs.size() == 2){
+            return true;
+        }
+        return false;
+    }
+
     public boolean isThreeOfaKind(){
         for (Card card: hand) {
             Rank rank = card.getRank();
@@ -100,9 +117,22 @@ public class Player {
         return false;
     }
 
-    public boolean isStraightFlush(){
-        boolean isStraightFlush = false;
-        return isStraightFlush;
+    public boolean isStraight(){
+        Card card = getHighCard();
+        Rank rank = card.getRank();
+        int straightCount = 0;
+        for(int i = 0; i < 5; i++){
+            if (countRank(rank) == 1) {
+                straightCount++;
+            }
+            rank = rank.getPrior();
+        }
+
+        boolean result = false;
+        if (straightCount == 5) {
+            result = true;
+        }
+        return result;
     }
 
     public boolean isFlush(){

@@ -216,5 +216,69 @@ public class PlayerTest {
         assertFalse(player.isFourOfaKind());
     }
 
+    @Test
+    public void isTwoPairs(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("8H"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("8C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertTrue(player.isTwoPairs());
+    }
+    @Test
+    public void isStraight(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("7H"));
+        hand.add(Card.getCard("8D"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertTrue(player.isStraight());
+
+        hand = new ArrayList<Card>();
+        hand.add(Card.getCard("2S"));
+        hand.add(Card.getCard("3H"));
+        hand.add(Card.getCard("4D"));
+        hand.add(Card.getCard("5C"));
+        hand.add(Card.getCard("6C"));
+        player.setHand(hand);
+        assertTrue(player.isStraight());
+
+        hand = new ArrayList<Card>();
+        hand.add(Card.getCard("TS"));
+        hand.add(Card.getCard("JH"));
+        hand.add(Card.getCard("QD"));
+        hand.add(Card.getCard("KC"));
+        hand.add(Card.getCard("AC"));
+        player.setHand(hand);
+        assertTrue(player.isStraight());
+    }
+
+    @Test
+    public void isNotStraight(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("7H"));
+        hand.add(Card.getCard("8D"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("AC"));
+        player.setHand(hand);
+        assertFalse(player.isStraight());
+
+        hand = new ArrayList<Card>();
+        hand.add(Card.getCard("2S"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("4D"));
+        hand.add(Card.getCard("5C"));
+        hand.add(Card.getCard("6C"));
+        player.setHand(hand);
+        assertFalse(player.isStraight());
+    }
 
 }
