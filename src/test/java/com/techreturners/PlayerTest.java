@@ -1,5 +1,6 @@
 package com.techreturners;
 
+import com.techreturners.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PlayerTest {
-
 
     @Test
     public void initialiseHand() {
@@ -61,19 +61,7 @@ public class PlayerTest {
         player.setHand(hand);
         assertTrue(player.isFlush());
     }
-    @Test
-    public void getHighCard(){
-        Player player = new Player("White");
-        ArrayList<Card> hand = new ArrayList<Card>();
-        hand.add(Card.getCard("6H"));
-        hand.add(Card.getCard("7H"));
-        hand.add(Card.getCard("8H"));
-        hand.add(Card.getCard("9H"));
-        hand.add(Card.getCard("TH"));
-        player.setHand(hand);
-        assertEquals("TH", player.getHighCard().toString());
 
-    }
     @Test
     public void isNotFlush() {
         Player player = new Player("White");
@@ -86,5 +74,60 @@ public class PlayerTest {
         player.setHand(hand);
         assertFalse(player.isFlush());
     }
+
+    @Test
+    public void getHighCard(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("5S"));
+        hand.add(Card.getCard("7D"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("9H"));
+        hand.add(Card.getCard("TH"));
+        player.setHand(hand);
+        assertEquals("TH", player.getHighCard().toString());
+    }
+
+    @Test
+    public void countRank(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("5S"));
+        hand.add(Card.getCard("2D"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("9H"));
+        hand.add(Card.getCard("9H"));
+        player.setHand(hand);
+        assertEquals(1,player.countRank(Rank.FIVE));
+        assertEquals(2,player.countRank(Rank.TWO));
+        assertEquals(2,player.countRank(Rank.NINE));
+    }
+
+    @Test
+    public void isPair(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("8H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertTrue(player.isPair());
+    }
+
+    @Test
+    public void isNotPair(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("7D"));
+        hand.add(Card.getCard("8H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertFalse(player.isPair());
+    }
+
 
 }

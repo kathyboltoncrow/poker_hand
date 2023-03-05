@@ -1,5 +1,6 @@
 package com.techreturners;
 
+import com.techreturners.enums.Rank;
 import com.techreturners.enums.Suit;
 
 import java.util.ArrayList;
@@ -58,10 +59,45 @@ public class Player {
         return highCard;
     }
 
+    public int countRank(Rank rank){
+        int countRank = 0;
+        for (Card card: hand) {
+           if(rank.equals(card.getRank())) {
+               countRank++;
+           }
+        }
+        return countRank;
+    }
+
+    public boolean izPair(){
+        boolean isPair = false;
+        int countRank = 0;
+
+        for (Card card: hand) {
+            Rank rank = card.getRank();
+
+            if(rank.equals(card.getRank())) {
+                countRank++;
+            }
+        }
+        if (countRank == 2){
+            isPair = true;
+        }
+        return isPair;
+    }
+
+    public boolean isPair(){
+        for (Card card: hand) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isStraightFlush(){
         boolean isStraightFlush = false;
-
-
         return isStraightFlush;
     }
 
