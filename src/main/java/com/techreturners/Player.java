@@ -69,22 +69,6 @@ public class Player {
         return countRank;
     }
 
-    public boolean izPair(){
-        boolean isPair = false;
-        int countRank = 0;
-
-        for (Card card: hand) {
-            Rank rank = card.getRank();
-
-            if(rank.equals(card.getRank())) {
-                countRank++;
-            }
-        }
-        if (countRank == 2){
-            isPair = true;
-        }
-        return isPair;
-    }
 
     public boolean isPair(){
         for (Card card: hand) {
@@ -124,6 +108,13 @@ public class Player {
         }
 
         return isFlush;
+    }
+
+    public boolean isFullHouse() {
+        if(isPair() && isThreeOfaKind()){
+            return true;
+        }
+        return false;
     }
 }
 

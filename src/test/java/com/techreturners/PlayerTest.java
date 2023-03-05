@@ -127,6 +127,15 @@ public class PlayerTest {
         hand.add(Card.getCard("TC"));
         player.setHand(hand);
         assertFalse(player.isPair());
+
+        hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("TC"));
+        player.setHand(hand);
+        assertFalse(player.isPair());
     }
 
     @Test
@@ -153,6 +162,32 @@ public class PlayerTest {
         hand.add(Card.getCard("TC"));
         player.setHand(hand);
         assertFalse(player.isThreeOfaKind());
+    }
+
+    @Test
+    public void isFullHouse(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("6D"));
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("9C"));
+        player.setHand(hand);
+        assertTrue(player.isFullHouse());
+    }
+
+    @Test
+    public void isNotFullHouse(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6S"));
+        hand.add(Card.getCard("7D"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("9C"));
+        hand.add(Card.getCard("9C"));
+        player.setHand(hand);
+        assertFalse(player.isFullHouse());
     }
 
 
