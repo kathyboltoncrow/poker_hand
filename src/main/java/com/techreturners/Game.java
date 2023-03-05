@@ -39,6 +39,10 @@ public class Game {
         return deck;
     }
 
+    public List<Card> getDeck(){
+        return this.deck;
+    }
+
     public List<Card> deal() {
         ArrayList<Card> hand = new ArrayList<Card>();
         for (int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
@@ -52,13 +56,14 @@ public class Game {
         initialiseDeck();
         ArrayList<Card> hand = new ArrayList<Card>();
         for (int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
-
-            hand.add(deck.get(i));
-            deck.remove(i);
+            for (Player player : players) {
+                Card card = deck.get(0);
+                player.addCard(card);
+                deck.remove(0);
+            }
         }
-
-
     }
+
 
 }
 

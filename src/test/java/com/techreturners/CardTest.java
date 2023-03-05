@@ -22,4 +22,19 @@ public class CardTest {
         Card theCard = new Card(rank, suit);
         assertEquals(expected,theCard.getRank().toString() + theCard.getSuit().toString());
     }
+
+    @Test
+    public void initCardNotation(){
+        Card card = Card.getCard("2H");
+        assertEquals(Rank.TWO, card.getRank());
+        assertEquals(Suit.HEARTS, card.getSuit());
+    }
+
+    @Test
+    public void initCardNotationInvalid(){
+        Card card = Card.getCard("XX");
+        assertNull(card);
+        card = Card.getCard(null);
+        assertNull(card);
+    }
 }
