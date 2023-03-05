@@ -43,6 +43,21 @@ public class Player {
         System.out.println(sb);
     }
 
+    public Card getHighCard(){
+        Card highCard = null;
+
+        for (Card card:hand) {
+            if(highCard == null){
+                highCard = card;
+            } else {
+                if(card.getRank().getValue() > highCard.getRank().getValue() ){
+                    highCard = card;
+                }
+            }
+        }
+        return highCard;
+    }
+
     public boolean isStraightFlush(){
         boolean isStraightFlush = false;
 

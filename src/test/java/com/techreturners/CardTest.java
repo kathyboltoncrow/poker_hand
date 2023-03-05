@@ -28,6 +28,9 @@ public class CardTest {
         Card card = Card.getCard("2H");
         assertEquals(Rank.TWO, card.getRank());
         assertEquals(Suit.HEARTS, card.getSuit());
+        card = Card.getCard("TH");
+        assertEquals(Rank.TEN, card.getRank());
+        assertEquals(Suit.HEARTS, card.getSuit());
     }
 
     @Test

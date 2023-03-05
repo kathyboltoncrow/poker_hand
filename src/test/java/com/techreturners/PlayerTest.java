@@ -6,23 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PlayerTest {
-    @Test
-    public void isFlush() {
-        Player player = new Player("White");
-        ArrayList<Card> hand = new ArrayList<Card>();
-        hand.add(Card.getCard("2H"));
-        hand.add(Card.getCard("2H"));
-        hand.add(Card.getCard("2H"));
-        hand.add(Card.getCard("2H"));
-        hand.add(Card.getCard("2H"));
-        player.setHand(hand);
-        assertTrue(player.isFlush());
-    }
+
 
     @Test
     public void initialiseHand() {
@@ -59,6 +47,44 @@ public class PlayerTest {
         assertEquals(42, game.getDeck().size());
         white.printHand();
         black.printHand();
+    }
+
+    @Test
+    public void isFlush() {
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        player.setHand(hand);
+        assertTrue(player.isFlush());
+    }
+    @Test
+    public void getHighCard(){
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("6H"));
+        hand.add(Card.getCard("7H"));
+        hand.add(Card.getCard("8H"));
+        hand.add(Card.getCard("9H"));
+        hand.add(Card.getCard("TH"));
+        player.setHand(hand);
+        assertEquals("TH", player.getHighCard().toString());
+
+    }
+    @Test
+    public void isNotFlush() {
+        Player player = new Player("White");
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(Card.getCard("2S"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        hand.add(Card.getCard("2H"));
+        player.setHand(hand);
+        assertFalse(player.isFlush());
     }
 
 }
