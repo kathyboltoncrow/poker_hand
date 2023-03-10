@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CardTest {
@@ -40,4 +43,14 @@ public class CardTest {
         card = Card.getCard(null);
         assertNull(card);
     }
+
+    @Test
+    public void getResult(){
+        Game game = new Game();
+        Player white = new Player("White");
+        List<Card> whiteHand = new ArrayList<>();
+
+    }
+
+
 }

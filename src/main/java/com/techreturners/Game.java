@@ -10,19 +10,50 @@ public class Game {
     private static final int DECK_CARDS = 52;
     private static final int NUMBER_CARDS_PER_HAND = 5;
     private List<Card> deck;
-    private Set<Player> players;
+    private Player playerOne;
+    private Player playerTwo;
+
 
     public Game() {
-        players = new HashSet<Player>();
+        this.playerOne = new Player(playerOne.getName());
+        this.playerTwo = new Player(playerTwo.getName());
+    }
+    public Game(Player playerOne, Player playerTwo) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
     }
 
-    public Player addPlayer(String name){
-        Player player = new Player(name);
-        players.add(player);
-        return player;
+    public void setPlayerOne(Player playerOne) {
+        this.playerOne = playerOne;
     }
-    public Set<Player> getPlayers(){
-        return players;
+
+    public void setPlayerTwo(Player playerTwo) {
+        this.playerTwo = playerTwo;
+    }
+
+    public String getResult() {
+        String result = null;
+        int blackScore = playerOne.getHandScore();
+        int whiteScore = playerTwo.getHandScore();
+        int blackHighCard = playerOne.getHighCard().getRank().getValue();
+        int whiteHighCard = playerTwo.getHighCard().getRank().getValue();
+
+        if (blackScore > whiteScore) {
+            result = "Black wins.";
+        } else if (blackScore < whiteScore) {
+            result = "White wins.";
+        } else {
+            //todo check high cards etc.
+            if(blackHighCard > whiteHighCard){
+                result = "Black wins. - with High Card: " + playerOne.getHighCard().getRank();;
+            } else if (blackHighCard < whiteHighCard){
+                result = "White wins. - with High Card: " + playerTwo.getHighCard().getRank().name();
+            } else if (whiteHighCard == blackHighCard) {
+                //todo check next high card
+                result = "Tie";
+            }
+        }
+        return result;
     }
 
     public List<Card> initialiseDeck() {
@@ -51,19 +82,6 @@ public class Game {
         }
         return hand;
     }
-
-    public void casinoDeal(){
-        initialiseDeck();
-        ArrayList<Card> hand = new ArrayList<Card>();
-        for (int i = 0; i < NUMBER_CARDS_PER_HAND; i++) {
-            for (Player player : players) {
-                Card card = deck.get(0);
-                player.addCard(card);
-                deck.remove(0);
-            }
-        }
-    }
-
 
 }
 

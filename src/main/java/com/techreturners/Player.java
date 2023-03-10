@@ -3,10 +3,7 @@ package com.techreturners;
 import com.techreturners.enums.Rank;
 import com.techreturners.enums.Suit;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Player {
     private String name;
@@ -36,6 +33,7 @@ public class Player {
     public void addCard(Card card) {
         hand.add(card);
     }
+
     public void printHand(){
         StringBuffer sb = new StringBuffer();
         for (Card card: hand) {
@@ -44,7 +42,19 @@ public class Player {
         System.out.println(sb);
     }
 
+    public int getKicker(){
+        int highCard = 0;
+        List<Integer> list = new ArrayList<>();
+        for (Card card: hand) {
+            list.add (card.getRank().getValue());
+        }
+        Collections.sort(list, Collections.reverseOrder());
+
+        return list.get(0);
+    }
+
     public Card getHighCard(){
+
         Card highCard = null;
 
         for (Card card:hand) {
@@ -139,6 +149,7 @@ public class Player {
         boolean isFlush = false;
         Set<Suit> suitsInHand = new HashSet<Suit>();
 
+
         for (Card card : hand) {
             suitsInHand.add(card.getSuit());
         }
@@ -156,5 +167,38 @@ public class Player {
         }
         return false;
     }
+    
+    public boolean isStraightFlush() {
+        if ( isStraight() && isFlush() ) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getHandScore() {
+        int handScore = 0;
+        
+        if (isStraightFlush()) {
+            handScore = 100;
+        } else if (isFourOfaKind()) {
+            handScore = 90;
+        } else if (isFullHouse()) {
+            handScore = 80;
+        } else if (isFlush()) {
+            handScore = 70;
+        } else if (isStraight()) {
+            handScore = 60;
+        } else if (isThreeOfaKind()) {
+            handScore = 50;
+        } else if (isTwoPairs()) {
+            handScore = 40;
+        } else if (isPair()) {
+            handScore = 30;
+        } else {
+            handScore = 10;
+        }
+        return handScore;
+    }
+    
 }
 
