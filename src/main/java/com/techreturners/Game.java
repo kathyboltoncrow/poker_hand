@@ -33,19 +33,25 @@ public class Game {
 
     public String getResult() {
         String result = null;
-        int blackScore = playerOne.getHandScore();
-        int whiteScore = playerTwo.getHandScore();
+        String [] blackScoreTotal = playerOne.getHandScore();
+        int blackScore = Integer.valueOf(blackScoreTotal[0]);
+        String blackHandDescription = blackScoreTotal[1];
+
+        String [] whiteScoreTotal = playerTwo.getHandScore();
+        int whiteScore = Integer.valueOf(whiteScoreTotal[0]);
+        String whiteHandDescription = whiteScoreTotal[1];
+
         int blackHighCard = playerOne.getHighCard().getRank().getValue();
         int whiteHighCard = playerTwo.getHighCard().getRank().getValue();
 
         if (blackScore > whiteScore) {
-            result = "Black wins.";
+            result = "Black wins." + blackHandDescription;
         } else if (blackScore < whiteScore) {
-            result = "White wins.";
+            result = "White wins." + whiteHandDescription;
         } else {
             //todo check high cards etc.
             if(blackHighCard > whiteHighCard){
-                result = "Black wins. - with High Card: " + playerOne.getHighCard().getRank();;
+                result = "Black wins. - with High Card: " + playerOne.getHighCard().getRank().name();
             } else if (blackHighCard < whiteHighCard){
                 result = "White wins. - with High Card: " + playerTwo.getHighCard().getRank().name();
             } else if (whiteHighCard == blackHighCard) {

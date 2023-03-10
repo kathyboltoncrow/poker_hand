@@ -72,7 +72,7 @@ public class Player {
     public int countRank(Rank rank){
         int countRank = 0;
         for (Card card: hand) {
-           if(rank.equals(card.getRank())) {
+           if( card.getRank().equals(rank) ) {
                countRank++;
            }
         }
@@ -175,29 +175,43 @@ public class Player {
         return false;
     }
 
-    public int getHandScore() {
-        int handScore = 0;
+    public String [] getHandScore() {
+        String [] result = new String[2];
+        String handScore;
+        String handDescription;
         
         if (isStraightFlush()) {
-            handScore = 100;
+            handScore = "100";
+            handDescription = "Straight Flush";
         } else if (isFourOfaKind()) {
-            handScore = 90;
+            handScore = "90";
+            handDescription = "Four of a kind";
         } else if (isFullHouse()) {
-            handScore = 80;
+            handScore = "80";
+            handDescription = "Full House";
         } else if (isFlush()) {
-            handScore = 70;
+            handScore = "70";
+            handDescription = "Flush";
         } else if (isStraight()) {
-            handScore = 60;
+            handScore = "60";
+            handDescription = "Straight";
         } else if (isThreeOfaKind()) {
-            handScore = 50;
+            handScore = "50";
+            handDescription = "Three Of a Kind";
         } else if (isTwoPairs()) {
-            handScore = 40;
+            handScore = "40";
+            handDescription = "Two Pairs";
         } else if (isPair()) {
-            handScore = 30;
+            handScore = "30";
+            handDescription = "Pair";
         } else {
-            handScore = 10;
+            handScore = "10";
+            handDescription = " ";
         }
-        return handScore;
+        result[0] = handScore;
+        result[1] = handDescription;
+
+        return result;
     }
     
 }
