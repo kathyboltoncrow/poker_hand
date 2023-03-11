@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,7 +44,7 @@ public class PlayerTest {
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("2H"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isFlush());
     }
 
@@ -58,7 +57,7 @@ public class PlayerTest {
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("2H"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isFlush());
     }
 
@@ -71,7 +70,7 @@ public class PlayerTest {
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("9H"));
         hand.add(Card.getCard("TH"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertEquals("TH", player.getHighCard().toString());
     }
 
@@ -84,7 +83,7 @@ public class PlayerTest {
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("9H"));
         hand.add(Card.getCard("9H"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertEquals(1,player.countRank(Rank.FIVE));
         assertEquals(2,player.countRank(Rank.TWO));
         assertEquals(2,player.countRank(Rank.NINE));
@@ -99,7 +98,7 @@ public class PlayerTest {
         hand.add(Card.getCard("8H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isPair());
     }
 
@@ -112,7 +111,7 @@ public class PlayerTest {
         hand.add(Card.getCard("8H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isPair());
 
         hand = new ArrayList<Card>();
@@ -121,7 +120,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isPair());
     }
 
@@ -134,7 +133,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isThreeOfaKind());
     }
 
@@ -147,7 +146,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isThreeOfaKind());
     }
 
@@ -160,7 +159,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("9C"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isFullHouse());
     }
 
@@ -173,7 +172,7 @@ public class PlayerTest {
         hand.add(Card.getCard("2H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("9C"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isFullHouse());
     }
 
@@ -186,7 +185,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("6C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isFourOfaKind());
     }
 
@@ -199,7 +198,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6H"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isFourOfaKind());
     }
 
@@ -212,7 +211,7 @@ public class PlayerTest {
         hand.add(Card.getCard("6D"));
         hand.add(Card.getCard("8C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isTwoPairs());
     }
     @Test
@@ -224,7 +223,7 @@ public class PlayerTest {
         hand.add(Card.getCard("8D"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("TC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isStraight());
 
         hand = new ArrayList<Card>();
@@ -233,7 +232,7 @@ public class PlayerTest {
         hand.add(Card.getCard("4D"));
         hand.add(Card.getCard("5C"));
         hand.add(Card.getCard("6C"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isStraight());
 
         hand = new ArrayList<Card>();
@@ -242,7 +241,7 @@ public class PlayerTest {
         hand.add(Card.getCard("QD"));
         hand.add(Card.getCard("KC"));
         hand.add(Card.getCard("AC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertTrue(player.isStraight());
     }
 
@@ -255,7 +254,7 @@ public class PlayerTest {
         hand.add(Card.getCard("8D"));
         hand.add(Card.getCard("9C"));
         hand.add(Card.getCard("AC"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isStraight());
 
         hand = new ArrayList<Card>();
@@ -264,7 +263,7 @@ public class PlayerTest {
         hand.add(Card.getCard("4D"));
         hand.add(Card.getCard("5C"));
         hand.add(Card.getCard("6C"));
-        player.setHand(hand);
+        player.setCards(hand);
         assertFalse(player.isStraight());
     }
 

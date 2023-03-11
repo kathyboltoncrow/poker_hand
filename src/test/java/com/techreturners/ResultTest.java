@@ -4,7 +4,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,7 +21,7 @@ public class ResultTest {
         handOne.add(Card.getCard(cards1.substring(6,8)));
         handOne.add(Card.getCard(cards1.substring(9,11)));
         handOne.add(Card.getCard(cards1.substring(12,14)));
-        playerOne.setHand(handOne);
+        playerOne.setCards(handOne);
 
         ArrayList<Card> handTwo = new ArrayList<Card>();
 
@@ -32,7 +31,7 @@ public class ResultTest {
         handTwo.add(Card.getCard(cards2.substring(6,8)));
         handTwo.add(Card.getCard(cards2.substring(9,11)));
         handTwo.add(Card.getCard(cards2.substring(12,14)));
-        playerTwo.setHand(handTwo);
+        playerTwo.setCards(handTwo);
 
         assertEquals(5, handOne.size());
         assertEquals(5, handTwo.size());
@@ -40,7 +39,7 @@ public class ResultTest {
         assertEquals(player2, playerTwo.getName());
 
         Game game = new Game(playerOne, playerTwo);
-        assertEquals(result, game.getResult());
+        assertEquals(result, game.getResultText());
 
     }
 

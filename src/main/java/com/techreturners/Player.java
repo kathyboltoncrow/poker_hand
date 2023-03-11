@@ -2,16 +2,20 @@ package com.techreturners;
 
 import com.techreturners.enums.Rank;
 import com.techreturners.enums.Suit;
+import com.techreturners.hand.AbstractHand;
+import com.techreturners.hand.FlushHand;
+import com.techreturners.hand.HighCardHand;
+import com.techreturners.hand.StraightHand;
 
 import java.util.*;
 
 public class Player {
     private String name;
-    private List<Card> hand;
+    private List<Card> cards;
 
     public Player(String name) {
         this.name = name;
-        this.hand = new ArrayList<Card>();
+        this.cards = new ArrayList<Card>();
     }
 
     public String getName() {
@@ -22,21 +26,21 @@ public class Player {
         this.name = name;
     }
 
-    public List<Card> getHand() {
-        return hand;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public void addCard(Card card) {
-        hand.add(card);
+        cards.add(card);
     }
 
     public void printHand(){
         StringBuffer sb = new StringBuffer();
-        for (Card card: hand) {
+        for (Card card: cards) {
             sb.append(card.toString() + ",");
         }
         System.out.println(sb);
@@ -45,7 +49,7 @@ public class Player {
     public int getKicker(){
         int highCard = 0;
         List<Integer> list = new ArrayList<>();
-        for (Card card: hand) {
+        for (Card card: cards) {
             list.add (card.getRank().getValue());
         }
         Collections.sort(list, Collections.reverseOrder());
@@ -57,7 +61,7 @@ public class Player {
 
         Card highCard = null;
 
-        for (Card card:hand) {
+        for (Card card: cards) {
             if(highCard == null){
                 highCard = card;
             } else {
@@ -71,7 +75,7 @@ public class Player {
 
     public int countRank(Rank rank){
         int countRank = 0;
-        for (Card card: hand) {
+        for (Card card: cards) {
            if( card.getRank().equals(rank) ) {
                countRank++;
            }
@@ -81,7 +85,7 @@ public class Player {
 
 
     public boolean isPair(){
-        for (Card card: hand) {
+        for (Card card: cards) {
             Rank rank = card.getRank();
             if (countRank(rank) == 2) {
                 return true;
@@ -93,7 +97,7 @@ public class Player {
     public boolean isTwoPairs(){
         Set<Rank> twoPairs = new HashSet<Rank>();
 
-        for (Card card: hand) {
+        for (Card card: cards) {
             Rank rank = card.getRank();
             if(! twoPairs.contains(rank)) {
                 if (countRank(rank) == 2) {
@@ -108,7 +112,7 @@ public class Player {
     }
 
     public boolean isThreeOfaKind(){
-        for (Card card: hand) {
+        for (Card card: cards) {
             Rank rank = card.getRank();
             if (countRank(rank) == 3) {
                 return true;
@@ -118,7 +122,7 @@ public class Player {
     }
 
     public boolean isFourOfaKind(){
-        for (Card card: hand) {
+        for (Card card: cards) {
             Rank rank = card.getRank();
             if (countRank(rank) == 4) {
                 return true;
@@ -131,7 +135,7 @@ public class Player {
         Card card = getHighCard();
         Rank rank = card.getRank();
         int straightCount = 0;
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 5 && rank != null; i++){
             if (countRank(rank) == 1) {
                 straightCount++;
             }
@@ -149,8 +153,7 @@ public class Player {
         boolean isFlush = false;
         Set<Suit> suitsInHand = new HashSet<Suit>();
 
-
-        for (Card card : hand) {
+        for (Card card : cards) {
             suitsInHand.add(card.getSuit());
         }
 
@@ -213,6 +216,43 @@ public class Player {
 
         return result;
     }
-    
+
+    public AbstractHand getHand() {
+        AbstractHand playerHand;
+
+        if (isStraightFlush()) {
+            playerHand = null;
+        } else if (isFourOfaKind()) {
+            playerHand = null;
+        } else if (isFullHouse()) {
+            playerHand = null;
+        } else if (isFlush()) {
+            playerHand = new FlushHand(cards);
+        } else if (isStraight()) {
+            playerHand = new StraightHand(cards);
+        } else if (isThreeOfaKind()) {
+            playerHand = null;
+        } else if (isTwoPairs()) {
+            playerHand = null;
+        } else if (isPair()) {
+            playerHand = null;
+        } else {
+            playerHand = new HighCardHand(cards);
+        }
+
+        return playerHand;
+    }
+
+    public int getKickerForPair(){
+        int highCard = 0;
+        List<Integer> list = new ArrayList<>();
+        for (Card card: cards) {
+            list.add (card.getRank().getValue());
+        }
+        Collections.sort(list, Collections.reverseOrder());
+
+        return list.get(0);
+    }
+
 }
 

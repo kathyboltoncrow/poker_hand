@@ -2,6 +2,7 @@ package com.techreturners;
 
 import com.techreturners.enums.Rank;
 import com.techreturners.enums.Suit;
+import com.techreturners.hand.Hand;
 
 import java.util.*;
 
@@ -45,9 +46,9 @@ public class Game {
         int whiteHighCard = playerTwo.getHighCard().getRank().getValue();
 
         if (blackScore > whiteScore) {
-            result = "Black wins." + blackHandDescription;
+            result = "Black wins. - with " + blackHandDescription;
         } else if (blackScore < whiteScore) {
-            result = "White wins." + whiteHandDescription;
+            result = "White wins. - with " + whiteHandDescription;
         } else {
             //todo check high cards etc.
             if(blackHighCard > whiteHighCard){
@@ -55,13 +56,28 @@ public class Game {
             } else if (blackHighCard < whiteHighCard){
                 result = "White wins. - with High Card: " + playerTwo.getHighCard().getRank().name();
             } else if (whiteHighCard == blackHighCard) {
-                //todo check next high card
-                result = "Tie";
+                result = "Tie.";
             }
         }
         return result;
     }
 
+    public String getResultText() {
+        StringBuilder result = new StringBuilder();
+        Hand hand1 = playerOne.getHand();
+        Hand hand2 = playerTwo.getHand();
+
+        if (hand1.beats(hand2)) {
+            result.append(playerOne.getName() + " wins. - with " +
+                    playerOne.getHand().getDescription());
+        } else if (hand2.beats(hand1)) {
+            result.append(playerTwo.getName() + " wins. - with " +
+                    playerTwo.getHand().getDescription());
+        } else {
+            result.append("Tie");
+        }
+        return result.toString();
+    }
     public List<Card> initialiseDeck() {
         deck = new ArrayList<>(DECK_CARDS);
 
