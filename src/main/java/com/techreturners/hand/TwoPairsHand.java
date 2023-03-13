@@ -3,19 +3,17 @@ package com.techreturners.hand;
 import com.techreturners.Card;
 import com.techreturners.enums.Rank;
 
-import java.util.List;
+import java.util.*;
 
 public class TwoPairsHand extends AbstractHand {
-
     private static final int SCORE = 40;
-
-    private Rank rank;
-
+    private Rank highPairRank = null;
+    private Rank lowPairRank = null;
+    private Rank kickerRank = null;
 
     public TwoPairsHand(List<Card> cards) {
         super(cards);
-        Card highCard = getHighCard(cards);
-        this.rank = highCard.getRank();
+        extractRanks();
     }
 
     @Override
@@ -25,21 +23,28 @@ public class TwoPairsHand extends AbstractHand {
 
     @Override
     public Rank getRank() {
-        return rank;
+        return highPairRank;
     }
 
-    @Override
     public boolean beats(Hand otherHand) {
         boolean result = false;
 
-        if ( this.getScore() == otherHand.getScore() ) {
-            if ( this.rank.getValue() > otherHand.getRank().getValue() ) {
-                result = true;
-            }
-        } else if (this.getScore() > otherHand.getScore()) {
+        if (this.getScore() > otherHand.getScore()) {
             result = true;
+        } else if (this.getScore() == otherHand.getScore()) {
+            TwoPairsHand other = (TwoPairsHand) otherHand;
+            if (this.highPairRank.getValue() > other.highPairRank.getValue()) {
+                result = true;
+            } else if (this.highPairRank.getValue() == other.highPairRank.getValue()) {
+                if (this.lowPairRank.getValue() > other.lowPairRank.getValue()) {
+                    result = true;
+                } else if(this.lowPairRank.getValue() == other.lowPairRank.getValue()){
+                    if(this.kickerRank.getValue() > other.kickerRank.getValue()){
+                        result = true;
+                    }
+                }
+            }
         }
-
         return result;
     }
 
@@ -48,20 +53,22 @@ public class TwoPairsHand extends AbstractHand {
         return "Two Pairs";
     }
 
-    public static Card getHighCard(List<Card> cards){
+    public void extractRanks() {
 
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
+        for (Card card : super.getCards()) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 1) {
+                kickerRank = rank;
             } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
+                if (highPairRank == null && lowPairRank == null) {
+                    highPairRank = rank;
+                } else if (rank.isGreater(highPairRank)) {
+                    lowPairRank = highPairRank;
+                    highPairRank = rank;
+                } else{
+                    lowPairRank = rank;
                 }
             }
         }
-        return highCard;
     }
-
 }

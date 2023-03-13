@@ -14,8 +14,7 @@ public class ThreeOfAKindHand extends AbstractHand {
 
     public ThreeOfAKindHand(List<Card> cards) {
         super(cards);
-        Card highCard = getHighCard(cards);
-        this.rank = highCard.getRank();
+        this.rank = getThreeOfaKindRank();
     }
 
     @Override
@@ -48,20 +47,13 @@ public class ThreeOfAKindHand extends AbstractHand {
         return "Three Of a Kind";
     }
 
-    public static Card getHighCard(List<Card> cards){
-
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
-            } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
-                }
+    private Rank getThreeOfaKindRank(){
+        for (Card card: super.getCards()) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 3) {
+                return rank;
             }
         }
-        return highCard;
+        return null;
     }
-
 }

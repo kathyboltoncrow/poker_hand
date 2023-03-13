@@ -8,7 +8,6 @@ import java.util.List;
 public class StraightHand extends AbstractHand {
 
     private static final int SCORE = 60;
-
     private Rank rank;
     public StraightHand(List<Card> cards) {
         super(cards);
@@ -44,22 +43,6 @@ public class StraightHand extends AbstractHand {
     @Override
     public String getDescription() {
         return "Straight";
-    }
-
-    public static Card getHighCard(List<Card> cards){
-
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
-            } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
-                }
-            }
-        }
-        return highCard;
     }
 
 }

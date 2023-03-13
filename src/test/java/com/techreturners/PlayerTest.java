@@ -12,30 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
 
     @Test
-    public void initialiseHand() {
-        Game game = new Game();
-        List<Card> deck = game.initialiseDeck();
-        List<Card> hand = game.deal();
-        assertEquals(5, hand.size());
-    }
-
-    @Test
-    public void dealHand() {
-        Game game = new Game();
-        List<Card> deck = game.initialiseDeck();
-        List<Card> hand = game.deal();
-        assertEquals(47, deck.size());
-        assertEquals(5, hand.size());
-    }
-
-    @Test
-    public void casinoDeal() {
-        Game game = new Game();
-        Player white = new Player("White");
-        Player black = new Player("Black");
-    }
-
-    @Test
     public void isFlush() {
         Player player = new Player("White");
         ArrayList<Card> hand = new ArrayList<Card>();

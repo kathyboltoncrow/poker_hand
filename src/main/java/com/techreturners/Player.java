@@ -2,10 +2,7 @@ package com.techreturners;
 
 import com.techreturners.enums.Rank;
 import com.techreturners.enums.Suit;
-import com.techreturners.hand.AbstractHand;
-import com.techreturners.hand.FlushHand;
-import com.techreturners.hand.HighCardHand;
-import com.techreturners.hand.StraightHand;
+import com.techreturners.hand.*;
 
 import java.util.*;
 
@@ -46,21 +43,9 @@ public class Player {
         System.out.println(sb);
     }
 
-    public int getKicker(){
-        int highCard = 0;
-        List<Integer> list = new ArrayList<>();
-        for (Card card: cards) {
-            list.add (card.getRank().getValue());
-        }
-        Collections.sort(list, Collections.reverseOrder());
-
-        return list.get(0);
-    }
-
     public Card getHighCard(){
 
         Card highCard = null;
-
         for (Card card: cards) {
             if(highCard == null){
                 highCard = card;
@@ -83,11 +68,11 @@ public class Player {
         return countRank;
     }
 
-
     public boolean isPair(){
         for (Card card: cards) {
             Rank rank = card.getRank();
             if (countRank(rank) == 2) {
+
                 return true;
             }
         }
@@ -172,87 +157,34 @@ public class Player {
     }
     
     public boolean isStraightFlush() {
-        if ( isStraight() && isFlush() ) {
+        if (isStraight() && isFlush() ) {
             return true;
         }
         return false;
-    }
-
-    public String [] getHandScore() {
-        String [] result = new String[2];
-        String handScore;
-        String handDescription;
-        
-        if (isStraightFlush()) {
-            handScore = "100";
-            handDescription = "Straight Flush";
-        } else if (isFourOfaKind()) {
-            handScore = "90";
-            handDescription = "Four of a kind";
-        } else if (isFullHouse()) {
-            handScore = "80";
-            handDescription = "Full House";
-        } else if (isFlush()) {
-            handScore = "70";
-            handDescription = "Flush";
-        } else if (isStraight()) {
-            handScore = "60";
-            handDescription = "Straight";
-        } else if (isThreeOfaKind()) {
-            handScore = "50";
-            handDescription = "Three Of a Kind";
-        } else if (isTwoPairs()) {
-            handScore = "40";
-            handDescription = "Two Pairs";
-        } else if (isPair()) {
-            handScore = "30";
-            handDescription = "Pair";
-        } else {
-            handScore = "10";
-            handDescription = " ";
-        }
-        result[0] = handScore;
-        result[1] = handDescription;
-
-        return result;
     }
 
     public AbstractHand getHand() {
         AbstractHand playerHand;
 
         if (isStraightFlush()) {
-            playerHand = null;
+            playerHand = new StraightFlushHand(cards);
         } else if (isFourOfaKind()) {
-            playerHand = null;
+            playerHand = new FourOfAKindHand(cards);
         } else if (isFullHouse()) {
-            playerHand = null;
+            playerHand = new FullHouseHand(cards);
         } else if (isFlush()) {
             playerHand = new FlushHand(cards);
         } else if (isStraight()) {
             playerHand = new StraightHand(cards);
         } else if (isThreeOfaKind()) {
-            playerHand = null;
+            playerHand = new ThreeOfAKindHand(cards);
         } else if (isTwoPairs()) {
-            playerHand = null;
+            playerHand = new TwoPairsHand(cards);
         } else if (isPair()) {
-            playerHand = null;
+            playerHand = new PairHand(cards);
         } else {
             playerHand = new HighCardHand(cards);
         }
-
         return playerHand;
     }
-
-    public int getKickerForPair(){
-        int highCard = 0;
-        List<Integer> list = new ArrayList<>();
-        for (Card card: cards) {
-            list.add (card.getRank().getValue());
-        }
-        Collections.sort(list, Collections.reverseOrder());
-
-        return list.get(0);
-    }
-
 }
-

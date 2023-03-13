@@ -47,19 +47,4 @@ public class FlushHand extends AbstractHand {
         return "Flush";
     }
 
-    public static Card getHighCard(List<Card> cards){
-
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
-            } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
-                }
-            }
-        }
-        return highCard;
-    }
 }

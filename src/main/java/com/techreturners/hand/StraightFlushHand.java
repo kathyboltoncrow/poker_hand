@@ -44,23 +44,7 @@ public class StraightFlushHand extends AbstractHand {
 
     @Override
     public String getDescription() {
-        return "Straight Flush: " ;
-    }
-
-    public static Card getHighCard(List<Card> cards){
-
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
-            } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
-                }
-            }
-        }
-        return highCard;
+        return "Straight Flush" ;
     }
 
 }

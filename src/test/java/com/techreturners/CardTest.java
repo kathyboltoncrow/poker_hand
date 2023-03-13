@@ -44,13 +44,4 @@ public class CardTest {
         assertNull(card);
     }
 
-    @Test
-    public void getResult(){
-        Game game = new Game();
-        Player white = new Player("White");
-        List<Card> whiteHand = new ArrayList<>();
-
-    }
-
-
 }

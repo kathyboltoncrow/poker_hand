@@ -20,7 +20,6 @@ public class Card {
                 deck.put(code, card);
             }
         }
-       // Collections.shuffle();
 
     }
     private final Rank rank;

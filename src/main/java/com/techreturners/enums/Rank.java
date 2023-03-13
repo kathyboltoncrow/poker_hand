@@ -55,6 +55,10 @@ public enum Rank {
         }
         return prior;
     }
+
+    public boolean isGreater(Rank otherRank){
+        return (otherRank == null || this.getValue() > otherRank.getValue());
+    }
 }
 
 

@@ -13,8 +13,7 @@ public class FourOfAKindHand extends AbstractHand {
 
     public FourOfAKindHand(List<Card> cards) {
         super(cards);
-        Card highCard = getHighCard(cards);
-        this.rank = highCard.getRank();
+        this.rank = getFourOfaKindRank();
     }
 
     @Override
@@ -44,23 +43,16 @@ public class FourOfAKindHand extends AbstractHand {
 
     @Override
     public String getDescription() {
-        return "Four of a kind: " ;
+        return "Four Of a Kind" ;
     }
 
-    public static Card getHighCard(List<Card> cards){
-
-        Card highCard = null;
-
-        for (Card card: cards) {
-            if(highCard == null){
-                highCard = card;
-            } else {
-                if(card.getRank().getValue() > highCard.getRank().getValue() ){
-                    highCard = card;
-                }
+    private Rank getFourOfaKindRank(){
+        for (Card card: super.getCards()) {
+            Rank rank = card.getRank();
+            if (countRank(rank) == 4) {
+                return rank;
             }
         }
-        return highCard;
+        return null;
     }
-
 }
